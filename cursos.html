@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cursos - ESCOLA+</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="tema-geral bdy-geral disp-flex-dirct com-min-height">
+    <div id="menu-container"></div>
+    <header class="header">
+      <div id="menu-element" style="width: 33%"></div>
+      <div
+        style="
+          width: 34%;
+          justify-content: center;
+          justify-items: center;
+          display: flex;
+        "
+      >
+        <p id="header-title">Cursos</p>
+      </div>
+      <div class="header-logo">ESCOLA<span>+</span></div>
+    </header>
+    <div class="container">
+      <div class="tabs">
+        <button class="tab-button active" data-tab="presencial">
+          Presenciais
+        </button>
+        <button class="tab-button" data-tab="ead">EAD</button>
+      </div>
+
+      <div class="tab-content">
+        <!-- Conteúdo para Cursos Presenciais -->
+        <div id="presencial" class="tab-pane active">
+          <div class="course-list">
+            <!-- Curso 1 -->
+            <div class="course-card">
+              <h3 class="course-title">Libras Intermediário</h3>
+              <div class="course-info">
+                <div><i class="fas fa-map-marker-alt"></i> Santarém - PA</div>
+                <div><i class="fas fa-users"></i> 15 vagas disponíveis</div>
+                <div><i class="fas fa-clock"></i> 09h às 12h</div>
+                <div><i class="fas fa-calendar"></i> Segunda e Quarta</div>
+                <div><i class="fas fa-hourglass-half"></i> 120 horas</div>
+              </div>
+              <button class="btn-inscrever">Inscrever-se</button>
+            </div>
+
+            <!-- Curso 2 -->
+            <div class="course-card">
+              <h3 class="course-title">Cidadania</h3>
+              <div class="course-info">
+                <div><i class="fas fa-map-marker-alt"></i> Santarém - PA</div>
+                <div><i class="fas fa-users"></i> 20 vagas disponíveis</div>
+                <div><i class="fas fa-clock"></i> 14h às 17h</div>
+                <div><i class="fas fa-calendar"></i> Terça e Quinta</div>
+                <div><i class="fas fa-hourglass-half"></i> 100 horas</div>
+              </div>
+              <button class="btn-inscrever">Inscrever-se</button>
+            </div>
+
+            <!-- Curso 3 -->
+            <div class="course-card">
+              <h3 class="course-title">Secretariado</h3>
+              <div class="course-info">
+                <div><i class="fas fa-map-marker-alt"></i> Santarém - PA</div>
+                <div><i class="fas fa-users"></i> 12 vagas disponíveis</div>
+                <div><i class="fas fa-clock"></i> 9h às 11h</div>
+                <div><i class="fas fa-calendar"></i> Segunda a Sexta</div>
+                <div><i class="fas fa-hourglass-half"></i> 180 horas</div>
+              </div>
+              <button class="btn-inscrever">Inscrever-se</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conteúdo para Cursos EAD -->
+        <div id="ead" class="tab-pane">
+          <div class="course-list">
+            <!-- Curso 1 -->
+            <div class="course-card">
+              <h3 class="course-title">Segurança Digital</h3>
+              <div class="course-info">
+                <div>
+                  <i class="fas fa-laptop"></i>
+                  <a
+                    href="https://educacao-executiva.fgv.br/cursos/online/curta-media-duracao-online/seguranca-digital"
+                    >Acessar Plataforma</a
+                  >
+                </div>
+                <div><i class="fas fa-users"></i> Vagas ilimitadas</div>
+                <div><i class="fas fa-clock"></i> Flexível</div>
+                <div><i class="fas fa-calendar"></i> Acesso 24h</div>
+                <div><i class="fas fa-hourglass-half"></i> 5 horas</div>
+              </div>
+              <button class="btn-inscrever">Inscrever-se</button>
+            </div>
+
+            <!-- Curso 2 -->
+            <div class="course-card">
+              <h3 class="course-title">Finanças Públicas</h3>
+              <div class="course-info">
+                <div>
+                  <i class="fas fa-laptop"></i>
+                  <a
+                    href="https://educacao-executiva.fgv.br/cursos/online/curta-media-duracao-online/financas-publicas"
+                    >Acessar Plataforma</a
+                  >
+                </div>
+                <div><i class="fas fa-users"></i> Vagas ilimitadas</div>
+                <div><i class="fas fa-clock"></i> Flexível</div>
+                <div><i class="fas fa-calendar"></i> Acesso 24h</div>
+                <div><i class="fas fa-hourglass-half"></i> 2 horas</div>
+              </div>
+              <button class="btn-inscrever">Inscrever-se</button>
+            </div>
+
+            <!-- Curso 3 -->
+            <div class="course-card">
+              <h3 class="course-title">Direito Penal e Econômico</h3>
+              <div class="course-info">
+                <div>
+                  <i class="fas fa-laptop"></i>
+                  <a
+                    href="https://educacao-executiva.fgv.br/cursos/online/curta-media-duracao-online/direito-penal-e-economico"
+                    >Acessar Plataforma</a
+                  >
+                </div>
+                <div><i class="fas fa-users"></i> Vagas ilimitadas</div>
+                <div><i class="fas fa-clock"></i> Flexível</div>
+                <div><i class="fas fa-calendar"></i> Acesso 24h</div>
+                <div><i class="fas fa-hourglass-half"></i> 2 horas</div>
+              </div>
+              <button class="btn-inscrever">Inscrever-se</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="social-links">
+        <a
+          href="https://www.instagram.com/escoladolegislativo.cms?igsh=d3Brb241NDU2czN2"
+          class="social-link"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://www.youtube.com/channel/UCkl7wV4stYMUvJbNUg3pHaQ"
+          class="social-link"
+          ><i class="fab fa-youtube"></i
+        ></a>
+      </div>
+      <div class="copyright">
+        &copy; 2025 ESCOLA+ - Todos os direitos reservados
+      </div>
+    </footer>
+
+    <script src="menu-loader.js"></script>
+    <script>
+      if (window.loadMenu) window.loadMenu();
+    </script>
+    <script src="cursos.js"></script>
+  </body>
+</html>

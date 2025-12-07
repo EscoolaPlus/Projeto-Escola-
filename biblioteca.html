@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biblioteca Virtual - ESCOLA+</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./components/BookCard/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="tema-geral bdy-geral disp-flex-dirct com-min-height">
+    <div id="menu-container"></div>
+    <header class="header">
+      <div id="menu-element" style="width: 33%"></div>
+      <div
+        style="
+          width: 34%;
+          justify-content: center;
+          justify-items: center;
+          display: flex;
+        "
+      >
+        <p id="header-title">Biblioteca Virtual</p>
+      </div>
+      <div class="header-logo">ESCOLA<span>+</span></div>
+    </header>
+
+    <div class="container">
+      <section id="colecao-memoria" class="colecao-section">
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            padding: 30px;
+            justify-content: center;">
+          <h2>Coleção: Memória do Poder Legislativo da Cidade de Santarém</h2>
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            flex-wrap: wrap;
+            max-height: 100vh;">
+          <a
+            href="https://santarem.pa.leg.br/wp-content/uploads/2024/01/LivroMemoriadoLegislativodaCidadedeSantarem-Vol1.pdf"
+            class="book-card"
+            target="_blank"
+          >
+            <div class="book-card-image">
+              <img
+                src="./public/book1.png"
+                alt="Memória do Poder Legislativo — Volume 1"
+              />
+              <div class="book-card-badge">PDF</div>
+            </div>
+            <div style="display: flex; padding: 15px">
+              <h2 class="book-card-title">
+                Memória do Poder Legislativo — Volume 1
+              </h2>
+            </div>
+
+            <!-- <div class="book-card-content">
+              <h2 class="book-card-title">O Nome do Livro</h2>
+              <p class="book-card-author">por Autor do Livro</p>
+              <p class="book-card-description">
+                Uma breve descrição envolvente do livro que captura a essência
+                da obra e desperta o interesse do leitor.
+              </p>
+              <div class="book-card-footer">
+                <div class="book-card-cta">Ler Agora</div>
+              </div>
+            </div> -->
+          </a>
+          <a
+            href="https://santarem.pa.leg.br/wp-content/uploads/2024/01/LivroMemoriadoLegislativodaCidadedeSantarem-Vol2.pdf"
+            class="book-card"
+            target="_blank"
+          >
+            <div class="book-card-image">
+              <img
+                src="./public/book2.png"
+                alt="Memória do Poder Legislativo — Volume 2"
+              />
+              <div class="book-card-badge">PDF</div>
+            </div>
+            <div style="display: flex; padding: 15px">
+              <h2 class="book-card-title">
+                Memória do Poder Legislativo — Volume 2
+              </h2>
+            </div>
+          </a>
+          <a
+            href="https://santarem.pa.leg.br/wp-content/uploads/2024/01/LivroMemoriadoLegislativodaCidadedeSantarem-Vol3.pdf"
+            class="book-card"
+            target="_blank"
+          >
+            <div class="book-card-image">
+              <img
+                src="./public/book3.png"
+                alt="Memória do Poder Legislativo — Volume 3"
+              />
+              <div class="book-card-badge">PDF</div>
+            </div>
+            <div style="display: flex; padding: 15px">
+              <h2 class="book-card-title">
+                Memória do Poder Legislativo — Volume 3
+              </h2>
+            </div>
+          </a>
+        </div>
+      </section>
+    </div>
+    <footer class="footer">
+      <div class="social-links">
+        <a
+          href="https://www.instagram.com/escoladolegislativo.cms?igsh=d3Brb241NDU2czN2"
+          class="social-link"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://www.youtube.com/channel/UCkl7wV4stYMUvJbNUg3pHaQ"
+          class="social-link"
+          ><i class="fab fa-youtube"></i
+        ></a>
+      </div>
+      <div class="copyright">
+        &copy; 2025 ESCOLA+ - Todos os direitos reservados
+      </div>
+    </footer>
+    <script src="menu-loader.js"></script>
+    <script>
+      if (window.loadMenu) window.loadMenu();
+    </script>
+    <script src="cursos.js"></script>
+  </body>
+</html>

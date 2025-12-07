@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fale Conosco - ESCOLA+</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="tema-geral com-verde bdy-geral com-min-height">
+    <div id="menu-container"></div>
+    <header class="header">
+      <div id="menu-element" style="width: 33%"></div>
+      <div
+        style="
+          width: 34%;
+          justify-content: center;
+          justify-items: center;
+          display: flex;
+        "
+      >
+        <h1><i class="fas fa-comments"></i> Fale Conosco</h1>
+      </div>
+      <div class="header-logo">ESCOLA<span>+</span></div>
+    </header>
+    <div class="container">
+      <div class="fale-conosco-content">
+        <!-- Chat Bot -->
+        <section class="chat-section">
+          <h2>Chat Online</h2>
+          <div class="chat-container">
+            <div class="chat-messages" id="chat-messages">
+              <div class="message bot-message">
+                <div class="message-content">
+                  <p>
+                    Olá! Sou o assistente virtual da ESCOLA+. Como posso ajudar
+                    você hoje?
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="chat-input-container">
+              <input
+                type="text"
+                id="chat-input"
+                placeholder="Digite sua mensagem..."
+                autocomplete="off"
+              />
+              <button id="send-message">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dúvidas Frequentes -->
+        <section class="faq-section">
+          <h2>Dúvidas Frequentes</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-question">
+                <h3>Como me inscrevo em um curso?</h3>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Para se inscrever em um curso, você precisa estar logado em
+                  sua conta. Vá até a página de cursos, escolha o curso desejado
+                  e clique no botão "Inscrever-se".
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <h3>Os cursos são gratuitos?</h3>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Temos tanto cursos gratuitos quanto pagos. Na página de cada
+                  curso, você pode verificar se é gratuito ou pago.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <h3>Como obtenho meu certificado?</h3>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Após concluir todas as atividades e atingir a nota mínima,
+                  você poderá baixar seu certificado na página de certificados.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <h3>Posso acessar os cursos pelo celular?</h3>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Sim, nossa plataforma é totalmente responsiva e pode ser
+                  acessada por qualquer dispositivo com internet.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <h3>Como entro em contato com o suporte?</h3>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                <p>
+                  Você pode utilizar este chat online, enviar um e-mail para
+                  suporte@escolaplus.com ou ligar para (11) 1234-5678.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="social-links">
+        <a
+          href="https://www.instagram.com/escoladolegislativo.cms?igsh=d3Brb241NDU2czN2"
+          class="social-link"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://www.youtube.com/channel/UCkl7wV4stYMUvJbNUg3pHaQ"
+          class="social-link"
+          ><i class="fab fa-youtube"></i
+        ></a>
+      </div>
+      <div class="copyright">
+        &copy; 2025 ESCOLA+ - Todos os direitos reservados
+      </div>
+    </footer>
+
+    <script src="menu-loader.js"></script>
+    <script>
+      if (window.loadMenu) window.loadMenu();
+    </script>
+    <script src="faleconosco.js"></script>
+  </body>
+</html>

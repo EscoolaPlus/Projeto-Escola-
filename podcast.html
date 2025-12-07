@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Podcast - ESCOLA+</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body
+    class="tema-geral bdy-geral disp-flex-dirct com-min-height podcast-page"
+  >
+    <div id="menu-container"></div>
+    <header class="header">
+      <div id="menu-element" style="width: 33%"></div>
+      <div
+        style="
+          width: 34%;
+          justify-content: center;
+          justify-items: center;
+          display: flex;
+        "
+      >
+        <p id="header-title">Podcast</p>
+      </div>
+      <div class="header-logo">ESCOLA<span>+</span></div>
+    </header>
+    <div class="container">
+      <!-- Podcast vídeo do YouTube -->
+      <section class="podcast-player">
+        <div class="video-container">
+          <iframe
+            src="https://www.youtube.com/embed/a3zRxugx9CQ?list=PLBm9GNb4s033IG9BV4xflrXDus6aH--1M"
+            title="Podcast - ESCOLA+"
+            frameborder="0"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+    </div>
+    <footer class="footer">
+      <div class="social-links">
+        <a
+          href="https://www.instagram.com/escoladolegislativo.cms?igsh=d3Brb241NDU2czN2"
+          class="social-link"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://www.youtube.com/channel/UCkl7wV4stYMUvJbNUg3pHaQ"
+          class="social-link"
+          ><i class="fab fa-youtube"></i
+        ></a>
+      </div>
+      <div class="copyright">
+        &copy; 2025 ESCOLA+ - Todos os direitos reservados
+      </div>
+    </footer>
+
+    <script src="menu-loader.js"></script>
+    <script>
+      if (window.loadMenu) window.loadMenu();
+    </script>
+    <script src="cursos.js"></script>
+  </body>
+</html>

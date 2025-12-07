@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogos - ESCOLA+</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="tema-geral bdy-geral disp-flex-dirct com-min-height">
+    <div id="menu-container"></div>
+    <header class="header">
+      <div id="menu-element" style="width: 33%"></div>
+      <div
+        style="
+          width: 34%;
+          justify-content: center;
+          justify-items: center;
+          display: flex;
+        "
+      >
+        <p id="header-title">Jogos</p>
+      </div>
+      <div class="header-logo">ESCOLA<span>+</span></div>
+
+    </header>
+    <div class="container">
+      <!--Jogo 1-->
+        <iframe 
+          src="https://plenarinho.itch.io/trivia-eca"
+          class="responsive-iframe">
+        </iframe>
+        
+      <!--Jogo 2-->
+        <iframe
+          src="https://plenarinho.itch.io/se-liga-no-lixo"
+          class="responsive-iframe">
+        </iframe>
+
+    </div>
+    <footer class="footer">
+      <div class="social-links">
+        <a
+          href="https://www.instagram.com/escoladolegislativo.cms?igsh=d3Brb241NDU2czN2"
+          class="social-link"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://www.youtube.com/channel/UCkl7wV4stYMUvJbNUg3pHaQ"
+          class="social-link"
+          ><i class="fab fa-youtube"></i
+        ></a>
+      </div>
+      <div class="copyright">
+        &copy; 2025 ESCOLA+ - Todos os direitos reservados
+      </div>
+    </footer>
+
+    <script src="menu-loader.js"></script>
+    <script>
+      if (window.loadMenu) window.loadMenu();
+    </script>
+    <script src="cursos.js"></script>
+  </body>
+</html>

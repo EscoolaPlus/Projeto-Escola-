@@ -1,0 +1,133 @@
+/* Menu Lateral */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  background-color: var(--branco);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.side-menu.active {
+  left: 0;
+}
+
+.menu-header {
+  background-color: var(--azul-escuro);
+  color: var(--branco);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-menu {
+  background: none;
+  border: none;
+  color: var(--branco);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.icon-menu {
+  font-size: 1.5rem;
+  color: var(--azul-escuro);
+}
+
+.menu-item {
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 15px;
+  color: var(--azul-escuro);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.menu-item:hover {
+  background-color: var(--cinza-claro);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 999;
+}
+
+.menu-overlay.active {
+  display: block;
+}
+
+/* Estilos para o botão toggle (quando inserido no header) */
+.menu-toggle {
+  /* default: make the toggle clearly visible on light backgrounds */
+  background: var(--azul-escuro, #0b5ed7);
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  color: var(--branco, #fff);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(11, 94, 215, 0.18);
+  transition: transform 0.08s ease, box-shadow 0.12s ease,
+    background-color 0.12s ease;
+}
+
+/* Se o botão for fixo (fallback), garantir visibilidade */
+.menu-toggle[style] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+}
+
+/* High-contrast interaction states */
+.menu-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(11, 94, 215, 0.22);
+  background: color-mix(in srgb, var(--azul-escuro, #0b5ed7) 85%, black 15%);
+}
+
+.menu-toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(11, 94, 215, 0.18);
+}
+
+/* If the header or area is dark, invert the toggle to stay visible */
+.header.dark .menu-toggle,
+.menu-toggle.dark {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--branco, #fff);
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  box-shadow: none;
+}
+
+/* Provide a high-contrast variant class the HTML can add if needed */
+.menu-toggle.contrast {
+  background: #111; /* strong dark background */
+  color: #fff;
+  border: 2px solid #000;
+}
+
+/* Respect user prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .menu-toggle {
+    transition: none;
+  }
+  .menu-toggle:hover {
+    transform: none;
+  }
+}
