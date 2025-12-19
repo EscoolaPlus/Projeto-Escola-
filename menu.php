@@ -13,9 +13,6 @@
 		<a href="index.html" class="menu-item">
 			<i class="fas fa-home"></i> Início
 		</a>
-		<a href="cursos.html" class="menu-item">
-			<i class="fas fa-graduation-cap"></i> Cursos
-		</a>
 		<a href="biblioteca.html" class="menu-item">
 			<i class="fas fa-book"></i> Biblioteca Virtual
 		</a>

@@ -1,5 +1,3 @@
-// Fale Conosco - Lógica da página
-
 document.addEventListener('DOMContentLoaded', function() {
     // Elementos DOM
     const chatMessages = document.getElementById('chat-messages');
@@ -7,102 +5,125 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendMessageBtn = document.getElementById('send-message');
     const faqItems = document.querySelectorAll('.faq-item');
     
-    // Respostas do bot (simuladas)
+    // Respostas do bot
     const botResponses = {
-        'inscricao': 'Para se inscrever em um curso, você precisa estar logado em sua conta. Vá até a página de cursos, escolha o curso desejado e clique no botão "Inscrever-se".',
-        'curso gratuito': 'Temos tanto cursos gratuitos quanto pagos. Na página de cada curso, você pode verificar se é gratuito ou pago.',
-        'certificado': 'Após concluir todas as atividades e atingir a nota mínima, você poderá baixar seu certificado na página de certificados.',
-        'acesso mobile': 'Sim, nossa plataforma é totalmente responsiva e pode ser acessada por qualquer dispositivo com internet.',
-        'suporte': 'Você pode utilizar este chat online, enviar um e-mail para suporte@escolaplus.com ou ligar para (11) 1234-5678.',
-        'default': 'Desculpe, não entendi sua pergunta. Você pode reformular ou verificar as dúvidas frequentes abaixo.'
+        'inscricao': 'Para se inscrever em um curso, vá até a página de <strong>Cursos</strong>, escolha o desejado e clique no botão "Inscrever-se".',
+        'curso gratuito': 'Temos tanto cursos gratuitos quanto pagos. Na página de cada curso, você verá uma etiqueta indicando a modalidade.',
+        'certificado': 'Após concluir todas as atividades e atingir a nota mínima, você poderá baixar seu certificado na área do aluno.',
+        'acesso mobile': 'Sim! O ESCOLA+ é totalmente responsivo e funciona no seu celular ou tablet.',
+        'suporte': 'Além deste chat, você pode enviar e-mail para <strong>suporte@camara.santarem.br</strong> ou ligar para a Câmara.',
+        'jogos': 'Nossos jogos educativos estão na aba "Jogos" no menu lateral. Divirta-se aprendendo!',
+        'default': 'Desculpe, não entendi bem. Tente usar palavras como "inscrição", "certificado" ou "suporte".'
     };
     
     // Palavras-chave para as respostas
     const keywords = {
-        'inscricao': ['inscrever', 'inscrição', 'matricular', 'matrícula'],
-        'curso gratuito': ['gratuito', 'grátis', 'free', 'custo', 'preço'],
-        'certificado': ['certificado', 'diploma', 'conclusão', 'certificar'],
-        'acesso mobile': ['celular', 'mobile', 'tablet', 'smartphone', 'aplicativo'],
-        'suporte': ['suporte', 'contato', 'ajuda', 'falar', 'atendimento']
+        'inscricao': ['inscrever', 'inscrição', 'inscricao', 'matricular', 'matrícula', 'matricula', 'cadastro'],
+        'curso gratuito': ['gratis', 'grátis', 'gratuito', 'pagar', 'preço', 'valor', 'custo'],
+        'certificado': ['certificado', 'diploma', 'conclusão', 'conclusao'],
+        'acesso mobile': ['celular', 'mobile', 'app', 'android', 'iphone', 'tablet'],
+        'suporte': ['suporte', 'ajuda', 'contato', 'email', 'telefone', 'falar', 'humano'],
+        'jogos': ['jogo', 'game', 'jogar', 'diversao', 'ludico']
     };
-    
-    // Função para adicionar mensagem no chat
+
+    // --- FUNÇÕES AUXILIARES ---
+
+    // Remove acentos para facilitar a comparação (ex: 'Inscrição' vira 'inscricao')
+    function removeAcentos(texto) {
+        return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    }
+
+    // Adiciona mensagem na tela
     function addMessage(text, isUser) {
         const messageDiv = document.createElement('div');
         messageDiv.className = isUser ? 'message user-message' : 'message bot-message';
         
-        const messageContent = document.createElement('div');
-        messageContent.className = 'message-content';
-        messageContent.innerHTML = `<p>${text}</p>`;
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'message-content';
+        contentDiv.innerHTML = `<p>${text}</p>`;
         
-        messageDiv.appendChild(messageContent);
+        messageDiv.appendChild(contentDiv);
         chatMessages.appendChild(messageDiv);
         
-        // Rolagem automática para a última mensagem
+        // Rola para o final
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-    
-    // Função para processar a mensagem do usuário
+
+    // Processa a lógica do robô
     function processUserMessage(message) {
-        // Converter para minúsculas para facilitar a comparação
-        const lowerMessage = message.toLowerCase();
+        // 1. Limpa a mensagem (minúsculas e sem acentos)
+        const cleanMessage = removeAcentos(message.toLowerCase());
         
-        // Verificar palavras-chave
         let responseKey = 'default';
         
+        // 2. Procura palavras-chave
         for (const [key, words] of Object.entries(keywords)) {
-            if (words.some(word => lowerMessage.includes(word))) {
+            // Verifica se alguma palavra da lista está na mensagem do usuário
+            if (words.some(word => cleanMessage.includes(removeAcentos(word)))) {
                 responseKey = key;
                 break;
             }
         }
         
-        // Adicionar resposta do bot após um pequeno delay (simulando processamento)
+        // 3. Cria indicador de "Digitando..."
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot-message typing-indicator';
+        typingDiv.innerHTML = '<div class="message-content" style="background-color: #e0e0e0; color: #555;"><p><em>Digitando...</em></p></div>';
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // 4. Responde após um delay (simulando pensamento)
         setTimeout(() => {
+            // Remove o indicador
+            if (typingDiv.parentNode) {
+                chatMessages.removeChild(typingDiv);
+            }
+            // Adiciona a resposta final
             addMessage(botResponses[responseKey], false);
-        }, 1000);
+        }, 1500);
     }
     
-    // Evento de enviar mensagem
+    // --- EVENT LISTENERS ---
+
+    // Clique no botão enviar
     sendMessageBtn.addEventListener('click', function() {
         const message = chatInput.value.trim();
         
         if (message) {
-            // Adicionar mensagem do usuário
-            addMessage(message, true);
-            
-            // Processar mensagem
-            processUserMessage(message);
-            
-            // Limpar campo de entrada
-            chatInput.value = '';
+            addMessage(message, true); // Adiciona msg do usuário
+            processUserMessage(message); // Chama o robô
+            chatInput.value = ''; // Limpa o campo
         }
     });
     
-    // Evento de pressionar Enter no campo de entrada
+    // Pressionar Enter no input
     chatInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             sendMessageBtn.click();
         }
     });
     
-    // FAQ - Abrir/fechar itens
+    // Lógica do FAQ (Accordion)
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         
         question.addEventListener('click', function() {
-            // Fechar todos os outros itens
+            // Fecha os outros
             faqItems.forEach(otherItem => {
                 if (otherItem !== item) {
                     otherItem.classList.remove('active');
                 }
             });
-            
-            // Abrir/fechar o item clicado
+            // Alterna o atual
             item.classList.toggle('active');
         });
     });
-    
-    // Mensagem inicial do bot (já está no HTML, mas podemos adicionar dinamicamente se necessário)
-    // addMessage('Olá! Sou o assistente virtual da ESCOLA+. Como posso ajudar você hoje?', false);
+
+    // Mensagem de boas-vindas inicial (opcional)
+    // Se o chat estiver vazio, o robô fala primeiro
+    if (chatMessages.children.length === 0) {
+        setTimeout(() => {
+             addMessage("Olá! Sou o assistente virtual do ESCOLA+. Como posso te ajudar hoje?", false);
+        }, 500);
+    }
 });

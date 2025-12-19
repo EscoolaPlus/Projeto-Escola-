@@ -5,109 +5,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ESCOLA+ - Sua Plataforma Educacional</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
-  <body>
+
+  <body class="tema-geral bdy-geral disp-flex-dirct">
     <div id="menu-container"></div>
-    <!-- Tela Principal -->
-    <div id="main-screen">
+
+    <div id="main-screen" class="container">
       <header class="header">
         <div id="menu-element" style="width: 33%"></div>
-        <div
-          style="
-            width: 34%;
-            justify-content: center;
-            justify-items: center;
-            display: flex;
-          "
-        >
-          <p id="header-title"></p>
+        <div style="width: 34%; display: flex; justify-content: center">
+          <p id="header-title">Início</p>
         </div>
         <div class="header-logo">ESCOLA<span>+</span></div>
       </header>
 
       <div class="content">
         <div class="carousel">
-          <div class="carousel-inner">
-            <div
-              class="carousel-item"
-              style="
-                background-image: linear-gradient(
-                    rgba(0, 0, 0, 0.3),
-                    rgba(0, 0, 0, 0.3)
-                  ),
-                  url('https://santarem.pa.leg.br/wp-content/uploads/2025/10/05-702x336.jpg');
-              "
-            >
-              <h2>8 de outubro de 2025</h2>
-              <p>
-                Vereador Alberto Portela destaca as novas reformas e ampliações
-                das escolas municipais
-              </p>
+          <a id="carousel-link" href="#" target="_blank" class="carousel-link">
+            <div id="carousel-item" class="carousel-item" style="transition: opacity 0.6s ease; background-color: #003366; background-size: cover; background-position: center;">
+              <h2 id="news-date">Acedendo ao Portal...</h2>
+              <p id="news-text">Carregando as últimas notícias da Câmara de Santarém.</p>
             </div>
-            <div
-              class="carousel-item"
-              style="
-                background-image: linear-gradient(
-                    rgba(0, 0, 0, 0.3),
-                    rgba(0, 0, 0, 0.3)
-                  ),
-                  url('https://santarem.pa.leg.br/wp-content/uploads/2025/10/02-2-702x336.jpg');
-              "
-            >
-              <h2>8 de outubro de 2025</h2>
-              <p>
-                Alba Leal realiza visita ao Cemei José Procópio e reforça pautas
-                importantes sobre educação, abastecimento de água e saúde
-                pública
-              </p>
-            </div>
-            <div
-              class="carousel-item"
-              style="
-                background-image: linear-gradient(
-                    rgba(0, 0, 0, 0.3),
-                    rgba(0, 0, 0, 0.3)
-                  ),
-                  url('https://santarem.pa.leg.br/wp-content/uploads/2025/10/01-4-702x336.jpg');
-              "
-            >
-              <h2>8 de outubro de 2025</h2>
-              <p>
-                Vereador Alberto Portela destaca as novas reformas e ampliações
-                das escolas municipais
-              </p>
-            </div>
-          </div>
+          </a>
         </div>
-      </div>
 
-      <footer class="footer">
-        <div class="social-links">
-          <a
-            href="https://www.instagram.com/escoladolegislativo.cms?igsh=d3Brb241NDU2czN2"
-            class="social-link"
-            ><i class="fab fa-instagram"></i
-          ></a>
-          <a
-            href="https://www.youtube.com/@camaramunicipaldesantarem8945"
-            class="social-link"
-            ><i class="fab fa-youtube"></i
-          ></a>
+        <div class="container" style="margin-top: 20px;">
+        <div class="content" style="text-align: center; padding: 20px;">
+            <h2 style="color: var(--azul-escuro); margin-bottom: 10px;">Explore o ESCOLA+</h2>
+            <p style="color: var(--cinza-escuro); margin-bottom: 25px;">O que você quer aprender ou jogar hoje?</p>
+            
+            <div class="incentive-grid">
+                <a href="biblioteca.html" class="incentive-card">
+                    <i class="fas fa-book-open"></i>
+                    <span>Biblioteca</span>
+                </a>
+                
+                <a href="jogos.html" class="incentive-card orange">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Jogos</span>
+                </a>
+            </div>
         </div>
-        <div class="copyright">
-          &copy; 2025 ESCOLA+ - Todos os direitos reservados
-        </div>
-      </footer>
+    </div>
+    
+    <!-- Fecha o main-screen para evitar recuo lateral no footer -->
     </div>
 
+    <!-- Footer fora do container principal para ocupar 100% da largura -->
+    <div id="footer-container"></div>
+
     <script src="menu-loader.js"></script>
+    <script src="footer-loader.js"></script>
     <script>
       if (window.loadMenu) window.loadMenu();
+
+      // 2. Buscar Notícias
+      async function carregarNoticias() {
+        const noticiasFallback = [
+           { data: "Hoje", titulo: "Bem-vindo ao ESCOLA+", link: "#", imagem: "https://via.placeholder.com/1200x600?text=Bem-vindo" },
+           { data: "Institucional", titulo: "Conheça nossa Biblioteca Virtual", link: "biblioteca.html", imagem: "https://via.placeholder.com/1200x600?text=Biblioteca" }
+        ];
+
+        const apiURL = "https://santarem.pa.leg.br/wp-json/wp/v2/posts?_embed&per_page=5";
+        // Usando proxy para evitar erro de CORS em desenvolvimento local
+        const proxyURL = `https://corsproxy.io/?${encodeURIComponent(apiURL)}`;
+
+        try {
+          const response = await fetch(proxyURL);
+          if (!response.ok) throw new Error("Erro na rede ou proxy");
+          
+          const posts = await response.json();
+          
+          const noticias = posts.map(post => {
+            let img = "https://via.placeholder.com/1200x600?text=Câmara+Municipal+de+Santarém";
+            if (post._embedded && post._embedded['wp:featuredmedia']) {
+              img = post._embedded['wp:featuredmedia'][0].source_url;
+            }
+            return {
+              data: new Date(post.date).toLocaleDateString('pt-BR'),
+              titulo: post.title.rendered,
+              link: post.link,
+              imagem: img
+            };
+          });
+
+          iniciarCarrossel(noticias.length > 0 ? noticias : noticiasFallback);
+        } catch (error) {
+          console.error("Usando notícias de fallback devido a erro:", error);
+          iniciarCarrossel(noticiasFallback);
+        }
+      }
+
+      function iniciarCarrossel(lista) {
+        let i = 0;
+        const item = document.getElementById("carousel-item");
+        const date = document.getElementById("news-date");
+        const text = document.getElementById("news-text");
+        const link = document.getElementById("carousel-link");
+
+        const img = new Image();
+        img.src = lista[0].imagem;
+
+        function slide() {
+          const n = lista[i];
+
+          item.style.opacity = 0;
+          
+          setTimeout(() => {
+            item.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${n.imagem}')`;
+            date.textContent = n.data;
+            text.innerHTML = n.titulo;
+            link.href = n.link;
+            
+            item.style.opacity = 1;
+            
+            i = (i + 1) % lista.length;
+            
+            const nextImg = new Image();
+            nextImg.src = lista[i].imagem;
+            
+          }, 600); // Deve bater com o transition no CSS (0.6s)
+        }
+        
+        // Inicia e define intervalo
+        slide(); 
+        setInterval(slide, 7000);
+      }
+      carregarNoticias();
     </script>
-    <script src="script.js"></script>
   </body>
 </html>
