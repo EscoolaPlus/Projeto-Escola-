@@ -40,8 +40,5 @@
 
       <div class="copyright">
         <p>&copy; 2025 ESCOLA+ <br> Todos os direitos reservados</p>
-        <!-- <p>
-          Desenvolvido por ...
-        </p> -->
       </div>
     </footer>

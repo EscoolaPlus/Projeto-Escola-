@@ -15,7 +15,6 @@ async function loadMenu(options = {}) {
     }
     container.innerHTML = html;
 
-    // Garantir que Font Awesome esteja carregado
     const faHref =
       "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
     if (!document.querySelector('link[href="' + faHref + '"]')) {
@@ -46,17 +45,14 @@ function setupMenuControls() {
   const closeBtn = document.getElementById("close-menu");
   let toggleBtn = document.querySelector(".menu-toggle");
 
-  // Se não existir um botão de toggle na página, criaremos um pequeno botão no canto superior esquerdo
   let createdToggle = false;
   if (!toggleBtn) {
-    // Criar o botão e tentar inseri-lo dentro do header para herdar estilos do index
     toggleBtn = document.createElement("button");
     toggleBtn.className = "menu-toggle";
     toggleBtn.id = "menu-toggle";
     toggleBtn.setAttribute("aria-label", "Abrir menu");
     toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
 
-    // Tentar anexar ao header (ou .header-logo) para manter o estilo azul do index
     const header = document.getElementById("menu-element");
     if (header) {
       // Inserir no início do header para ficar alinhado como no index
@@ -93,8 +89,6 @@ function setupMenuControls() {
     .querySelectorAll(".menu-item")
     .forEach((a) => a.addEventListener("click", closeMenu));
 
-  // Se criamos o toggle dinamicamente, não o removemos, mas deixamos sua existência para controle do usuário
 }
 
-// Expor função global para uso nas páginas
 window.loadMenu = loadMenu;

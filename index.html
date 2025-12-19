@@ -21,13 +21,35 @@
       </header>
 
       <div class="content">
+        <!-- Seção de Notícias -->
+        <div style="text-align: center; margin-bottom: 15px;">
+          <h2 style="color: var(--azul-escuro); font-size: 1.5rem; margin-bottom: 5px;">
+            <i class="fas fa-newspaper" style="margin-right: 8px;"></i>Últimas Notícias
+          </h2>
+          <p style="color: var(--cinza-escuro); font-size: 0.95rem;">
+            Acompanhe as novidades da Câmara Municipal
+          </p>
+        </div>
+
         <div class="carousel">
-          <a id="carousel-link" href="#" target="_blank" class="carousel-link">
-            <div id="carousel-item" class="carousel-item" style="transition: opacity 0.6s ease; background-color: #003366; background-size: cover; background-position: center;">
-              <h2 id="news-date">Acedendo ao Portal...</h2>
-              <p id="news-text">Carregando as últimas notícias da Câmara de Santarém.</p>
-            </div>
-          </a>
+          <div class="carousel-wrapper">
+            <a id="carousel-link" href="#" target="_blank" class="carousel-link">
+              <div id="carousel-item" class="carousel-item" style="background-color: #003366; background-size: cover; background-position: center;">
+                <h2 id="news-date">Acessando portal...</h2>
+                <p id="news-text">Carregando as últimas notícias da Câmara de Santarém.</p>
+              </div>
+            </a>
+          </div>
+          <div class="carousel-indicators" id="carousel-indicators"></div>
+        </div>
+
+        <!-- Seção de Apresentação -->
+        <div style="text-align: center; margin: 30px auto; max-width: 800px;">
+          <h2 style="color: var(--azul-escuro); font-size: 1.8rem; margin-bottom: 15px;">
+            Cidadania, Cultura e Inovação!
+          </h2>
+          <p style="color: #555; font-size: 1.05rem; line-height: 1.6;">
+            A Escola do Legislativo de Santarém agora cabe no seu bolso. Aprenda brincando com nossos jogos, explore documentos históricos na Biblioteca Virtual e fique por dentro dos debates ouvindo nosso Podcast. Educação e cidadania, a um toque de distância.          </p>
         </div>
 
         <div class="container" style="margin-top: 20px;">
@@ -49,10 +71,7 @@
         </div>
     </div>
     
-    <!-- Fecha o main-screen para evitar recuo lateral no footer -->
     </div>
-
-    <!-- Footer fora do container principal para ocupar 100% da largura -->
     <div id="footer-container"></div>
 
     <script src="menu-loader.js"></script>
@@ -60,7 +79,7 @@
     <script>
       if (window.loadMenu) window.loadMenu();
 
-      // 2. Buscar Notícias
+      // Buscar Notícias
       async function carregarNoticias() {
         const noticiasFallback = [
            { data: "Hoje", titulo: "Bem-vindo ao ESCOLA+", link: "#", imagem: "https://via.placeholder.com/1200x600?text=Bem-vindo" },
@@ -68,7 +87,6 @@
         ];
 
         const apiURL = "https://santarem.pa.leg.br/wp-json/wp/v2/posts?_embed&per_page=5";
-        // Usando proxy para evitar erro de CORS em desenvolvimento local
         const proxyURL = `https://corsproxy.io/?${encodeURIComponent(apiURL)}`;
 
         try {
@@ -99,38 +117,114 @@
 
       function iniciarCarrossel(lista) {
         let i = 0;
+        let intervalId = null;
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
         const item = document.getElementById("carousel-item");
         const date = document.getElementById("news-date");
         const text = document.getElementById("news-text");
         const link = document.getElementById("carousel-link");
+        const indicatorsContainer = document.getElementById("carousel-indicators");
+        const wrapper = document.querySelector(".carousel-wrapper");
 
+        lista.forEach((_, index) => {
+          const indicator = document.createElement("div");
+          indicator.className = `carousel-indicator ${index === 0 ? 'active' : ''}`;
+          indicator.addEventListener("click", () => goToSlide(index));
+          indicatorsContainer.appendChild(indicator);
+        });
+
+        // Pré-carregar primeira imagem
         const img = new Image();
         img.src = lista[0].imagem;
+
+        function updateIndicators() {
+          document.querySelectorAll(".carousel-indicator").forEach((ind, idx) => {
+            ind.classList.toggle("active", idx === i);
+          });
+        }
+
+        function goToSlide(index) {
+          if (index === i) return;
+          i = index;
+          slide();
+          resetInterval();
+        }
 
         function slide() {
           const n = lista[i];
 
-          item.style.opacity = 0;
+          item.style.transform = "translateX(-20px)";
+          item.style.opacity = "0";
           
           setTimeout(() => {
-            item.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${n.imagem}')`;
+            item.style.backgroundImage = `url('${n.imagem}')`;
             date.textContent = n.data;
             text.innerHTML = n.titulo;
             link.href = n.link;
             
-            item.style.opacity = 1;
+            item.style.transform = "translateX(0)";
+            item.style.opacity = "1";
             
-            i = (i + 1) % lista.length;
+            updateIndicators();
             
+            const nextIndex = (i + 1) % lista.length;
             const nextImg = new Image();
-            nextImg.src = lista[i].imagem;
+            nextImg.src = lista[nextIndex].imagem;
             
-          }, 600); // Deve bater com o transition no CSS (0.6s)
+          }, 500);
         }
+
+        function nextSlide() {
+          i = (i + 1) % lista.length;
+          slide();
+        }
+
+        function prevSlide() {
+          i = (i - 1 + lista.length) % lista.length;
+          slide();
+        }
+
+        function resetInterval() {
+          if (intervalId) clearInterval(intervalId);
+          intervalId = setInterval(nextSlide, 7000);
+        }
+
+        // Gestos touch para swipe
+        wrapper.addEventListener("touchstart", (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        wrapper.addEventListener("touchend", (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+          const swipeThreshold = 50;
+          const diff = touchStartX - touchEndX;
+          
+          if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+              nextSlide();
+            } else {
+              prevSlide();
+            }
+            resetInterval();
+          }
+        }
+
+        wrapper.addEventListener("mouseenter", () => {
+          if (intervalId) clearInterval(intervalId);
+        });
+
+        wrapper.addEventListener("mouseleave", () => {
+          resetInterval();
+        });
         
-        // Inicia e define intervalo
-        slide(); 
-        setInterval(slide, 7000);
+        slide();
+        resetInterval();
       }
       carregarNoticias();
     </script>

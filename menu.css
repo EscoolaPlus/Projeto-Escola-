@@ -1,3 +1,10 @@
+/* ===================================================================
+   MENU LATERAL - ESCOLA+
+   ===================================================================
+   Estilos para o menu lateral compartilhado (menu.php)
+   Utiliza variáveis CSS definidas em style.css
+   =================================================================== */
+
 /* Menu Lateral */
 .side-menu {
   position: fixed;
@@ -5,7 +12,7 @@
   left: -300px;
   width: 300px;
   height: 100%;
-  background-color: var(--branco);
+  background-color: var(--branco, #ffffff);
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
   transition: left 0.3s ease;
   z-index: 1000;
@@ -17,8 +24,8 @@
 }
 
 .menu-header {
-  background-color: var(--azul-escuro);
-  color: var(--branco);
+  background-color: var(--azul-escuro, #003366);
+  color: var(--branco, #ffffff);
   padding: 20px;
   display: flex;
   justify-content: space-between;
@@ -28,30 +35,40 @@
 .close-menu {
   background: none;
   border: none;
-  color: var(--branco);
+  color: var(--branco, #ffffff);
   font-size: 1.5rem;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.close-menu:hover {
+  transform: scale(1.1);
 }
 
 .icon-menu {
   font-size: 1.5rem;
-  color: var(--azul-escuro);
+  color: var(--azul-escuro, #003366);
 }
 
 .menu-item {
-  padding: 20px 20px;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: left;
   gap: 15px;
-  color: var(--azul-escuro);
+  color: var(--azul-escuro, #003366);
   text-decoration: none;
   font-weight: 500;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 .menu-item:hover {
-  background-color: var(--cinza-claro);
+  background-color: var(--cinza-claro, #f2f2f2);
+}
+
+.menu-item i {
+  width: 20px;
+  text-align: center;
 }
 
 .menu-overlay {
@@ -63,42 +80,39 @@
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
   z-index: 999;
+  backdrop-filter: blur(2px);
 }
 
 .menu-overlay.active {
   display: block;
 }
 
-/* Estilos para o botão toggle (quando inserido no header) */
+/* Botão Toggle do Menu */
 .menu-toggle {
-  /* default: make the toggle clearly visible on light backgrounds */
-  background: var(--azul-escuro, #0b5ed7);
+  background: var(--azul-escuro, #003366);
   border: 2px solid rgba(0, 0, 0, 0.08);
-  color: var(--branco, #fff);
+  color: var(--branco, #ffffff);
   font-size: 1.4rem;
   cursor: pointer;
   padding: 6px 8px;
   border-radius: 6px;
   box-shadow: 0 2px 6px rgba(11, 94, 215, 0.18);
-  transition: transform 0.08s ease, box-shadow 0.12s ease,
-    background-color 0.12s ease;
-}
-
-/* Se o botão for fixo (fallback), garantir visibilidade */
-.menu-toggle[style] {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 6px;
 }
 
-/* High-contrast interaction states */
 .menu-toggle:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(11, 94, 215, 0.22);
-  background: color-mix(in srgb, var(--azul-escuro, #0b5ed7) 85%, black 15%);
+  background: color-mix(in srgb, var(--azul-escuro, #003366) 85%, black 15%);
+}
+
+.menu-toggle:active {
+  transform: translateY(0);
 }
 
 .menu-toggle:focus {
@@ -106,28 +120,51 @@
   box-shadow: 0 0 0 3px rgba(11, 94, 215, 0.18);
 }
 
-/* If the header or area is dark, invert the toggle to stay visible */
+/* Variantes do Toggle */
 .header.dark .menu-toggle,
 .menu-toggle.dark {
   background: rgba(255, 255, 255, 0.06);
-  color: var(--branco, #fff);
+  color: var(--branco, #ffffff);
   border: 2px solid rgba(255, 255, 255, 0.14);
   box-shadow: none;
 }
 
-/* Provide a high-contrast variant class the HTML can add if needed */
 .menu-toggle.contrast {
-  background: #111; /* strong dark background */
+  background: #111;
   color: #fff;
   border: 2px solid #000;
 }
 
-/* Respect user prefers-reduced-motion */
+/* Acessibilidade */
 @media (prefers-reduced-motion: reduce) {
-  .menu-toggle {
+  .menu-toggle,
+  .side-menu,
+  .menu-item,
+  .close-menu {
     transition: none;
   }
-  .menu-toggle:hover {
+  
+  .menu-toggle:hover,
+  .close-menu:hover {
     transform: none;
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .side-menu {
+    width: 280px;
+  }
+  
+  .menu-item {
+    padding: 18px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .side-menu {
+    width: 280px;
+    left: -280px;
   }
 }

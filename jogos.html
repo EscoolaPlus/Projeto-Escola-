@@ -4,48 +4,212 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jogos - ESCOLA+</title>
-    <link rel="stylesheet" href="style.css" />
+    
+    <link rel="stylesheet" href="style.css" /> 
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    
+    <style>
+      /* --- Estrutura da Página --- */
+      .games-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        flex: 1;
+      }
+
+      .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+      }
+
+      .game-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #eee;
+      }
+
+      .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+
+      .game-thumb { height: 180px; background-color: #003366; position: relative; overflow: hidden; }
+      .game-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+      .game-icon-overlay {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;
+        opacity: 0; transition: opacity 0.3s;
+      }
+      .game-card:hover .game-icon-overlay { opacity: 1; }
+
+      .game-info { padding: 15px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+      .game-info h3 { color: #003366; font-size: 1.1rem; margin-bottom: 5px; }
+      .game-desc { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
+      .play-btn { background-color: var(--azul-escuro); color: white; padding: 8px 0; border-radius: var(--radius-md); font-weight: bold; text-transform: uppercase; font-size: 0.9rem; transition: var(--transition-normal); }
+      .play-btn:hover { background-color: var(--azul-destaque); transform: translateY(-2px); }
+
+      #gameModal {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: #000;
+        z-index: 10000;
+        flex-direction: column;
+      }
+
+      .modal-header {
+        height: 50px;
+        background: #000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        color: #fff;
+        border-bottom: 1px solid #333;
+      }
+
+      .close-btn {
+        background: var(--vermelho);
+        color: white;
+        border: none;
+        padding: 5px 15px;
+        cursor: pointer;
+        border-radius: var(--radius-sm);
+        font-weight: bold;
+        transition: var(--transition-normal);
+      }
+      
+      .close-btn:hover {
+        background: #cc0000;
+        transform: scale(1.05);
+      }
+
+      .game-frame-container {
+        flex: 1;
+        width: 100%;
+        background: #000;
+      }
+
+      #gameFrame {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+
+      .more-games-banner {
+        margin-top: 50px; padding: 40px 20px; background: #f4f7f9;
+        border-radius: 15px; text-align: center; border: 2px dashed #003366;
+      }
+      .plenarinho-btn {
+        display: inline-flex; align-items: center; gap: 10px; background-color: var(--azul-escuro);
+        color: white; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold;
+        transition: var(--transition-normal);
+      }
+      .plenarinho-btn:hover {
+        background-color: var(--azul-destaque);
+        transform: scale(1.05);
+      }
+    </style>
   </head>
+
   <body class="tema-geral bdy-geral disp-flex-dirct com-min-height">
     <div id="menu-container"></div>
+    
     <header class="header">
       <div id="menu-element" style="width: 33%"></div>
-      <div
-        style="
-          width: 34%;
-          justify-content: center;
-          justify-items: center;
-          display: flex;
-        "
-      >
-        <p id="header-title">Jogos</p>
+      <div style="width: 34%; display: flex; justify-content: center">
+        <p id="header-title">Jogos Educativos</p>
       </div>
       <div class="header-logo">ESCOLA<span>+</span></div>
-
     </header>
-    <div class="iframe-container">
-      <!--Jogo 1-->
-        <iframe 
-          src="https://plenarinho.itch.io/trivia-eca">
-        </iframe>
-        
-      <!--Jogo 2-->
-        <iframe
-          src="https://plenarinho.itch.io/se-liga-no-lixo">
-        </iframe>
 
+    <div id="gameModal">
+      <div class="modal-header">
+        <span><i class="fas fa-gamepad"></i> ESCOLA+ ARCADE</span>
+        <button class="close-btn" onclick="fecharJogo()">FECHAR JOGO X</button>
+      </div>
+      <div class="game-frame-container">
+        <iframe 
+          id="gameFrame" 
+          src="" 
+          allow="autoplay; fullscreen; gamepad; accelerometer; gyroscope" 
+          webkitallowfullscreen="true" 
+          mozallowfullscreen="true" 
+          allowfullscreen="true">
+        </iframe>
+      </div>
     </div>
+
+    <div class="games-container">
+      <div class="games-grid">
+        
+        <div class="game-card" onclick="abrirJogo('https://html-classic.itch.zone/html/7194541/se_liga_no_lixo/index.html')">
+          <div class="game-thumb">
+            <img src="https://img.itch.zone/aW1nLzIwNDgzNzAucG5n/315x250%23c/OqWqfG.png" alt="Se Liga no Lixo">
+            <div class="game-icon-overlay"><i class="fas fa-play fa-3x" style="color:#fff"></i></div>
+          </div>
+          <div class="game-info">
+            <h3>Se Liga no Lixo</h3>
+            <p class="game-desc">Aprenda sobre reciclagem e cuidado ambiental.</p>
+            <span class="play-btn">Jogar</span>
+          </div>
+        </div>
+
+        <div class="game-card" onclick="abrirJogo('https://html-classic.itch.zone/html/7095747/Cade%20v1.1.1f5/index.html')">
+          <div class="game-thumb">
+            <img src="https://img.itch.zone/aW1nLzExNTgyNDQ2LnBuZw==/315x250%23c/0k%2Bw%2B1.png" alt="Cadê a Mulher Aqui?">
+            <div class="game-icon-overlay"><i class="fas fa-play fa-3x" style="color:#fff"></i></div>
+          </div>
+          <div class="game-info">
+            <h3>Cadê a Mulher Aqui?</h3>
+            <p class="game-desc">Identifique situações de desigualdade social.</p>
+            <span class="play-btn">Jogar</span>
+          </div>
+        </div>
+
+      </div>
+
+      <section class="more-games-banner">
+        <h2>Quer mais desafios?</h2>
+        <p>Visite o portal oficial do Plenarinho para mais jogos!</p>
+        <a href="https://plenarinho.leg.br/index.php/category/jogos/" target="_blank" class="plenarinho-btn">
+          <i class="fas fa-external-link-alt"></i> Ver no Plenarinho
+        </a>
+      </section>
+    </div>
+
     <div id="footer-container"></div>
 
     <script src="menu-loader.js"></script>
     <script src="footer-loader.js"></script>
     <script>
       if (window.loadMenu) window.loadMenu();
+
+      function abrirJogo(url) {
+        const modal = document.getElementById('gameModal');
+        const iframe = document.getElementById('gameFrame');
+        iframe.src = url; 
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; 
+      }
+
+      function fecharJogo() {
+        const modal = document.getElementById('gameModal');
+        const iframe = document.getElementById('gameFrame');
+        iframe.src = ''; 
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; 
+      }
     </script>
-    <script src="cursos.js"></script>
   </body>
 </html>
